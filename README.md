@@ -21,28 +21,23 @@ A single backend serves all three clients (web CRM + React Native iOS/Android) t
 
 ## Screenshots
 
-> Put image files in a `screenshots/` folder at the repo root. Use **demo/seeded data only** — never real leads, contacts, or client information.
+> All screenshots use demo/seeded data — no real client information.
 
-**Hero — Web CRM dashboard** *(top of the README, first thing a visitor sees)*
+**Mobile app** — React Native client, live on iOS and Android
 
-![Dashboard](./screenshots/dashboard.png)
+| Dashboard | Enquiry Handling | Best Match | Project Config |
+|---|---|---|---|
+| ![Dashboard](./screenshot/dashboard-rep.jpg) | ![Enquiry Handling](./screenshot/enquiry-rep.jpg) | ![Best Match](./screenshot/best-match-rep.jpg) | ![Project Config](./screenshot/project-config-rep.jpg) |
 
-**Sign-in**
+**Web CRM**
 
-![Sign in](./screenshots/login.png)
+![Web CRM sign-in](./screenshot/crm-login-page.png)
 
-**Platforms** *(show the same product across all three surfaces — this is the credibility shot)*
+**Published on the App Store and Google Play**
 
-| Web | Android | iOS |
-|-----|---------|-----|
-| ![Web](./screenshots/web-crm.png) | ![Android](./screenshots/mobile-android.png) | ![iOS](./screenshots/mobile-ios.png) |
-
-**Feature flows** *(2–4 shots of real flows — lead pipeline, property detail, best-match share, billing)*
-
-![Leads](./screenshots/leads.png)
-![Property](./screenshots/property.png)
-
-*Where each shot comes from:* dashboard/login/feature shots → web CRM at `crm.terrisage.com`. Android/iOS shots → the installed mobile apps. Marketing-site and sign-in screens are safe as-is; any logged-in view must use demo data.
+| iOS — App Store | Android — Google Play |
+|---|---|
+| ![App Store listing](./screenshot/iso-app-store.png) | ![Google Play listing](./screenshot/android-play-store.png) |
 
 ---
 
