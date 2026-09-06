@@ -57,8 +57,8 @@ Terrisage is a purpose-built **Agent CRM** for real estate teams. It organizes e
 | Places / Geocoding | Places search + geocoding (provider-based) |
 | Digest / Sharing | Digest links, shareable artifacts, deep links |
 | Subscription & Billing | Plan/seat logic, payments, entitlement checks |
-| Payments | Stripe + Razorpay integration paths (provider-based) |
-| Lead Ingestion | Meta Lead Ads (Page OAuth + webhook), web forms, property portals |
+| Payments | Razorpay payment links for B2B invoicing |
+| Lead Ingestion | Meta Lead Ads (Page OAuth + webhook), web forms |
 
 ---
 
@@ -90,7 +90,7 @@ graph TB
     subgraph Integrations
         EMAIL["Email · Resend"]
         MAPS["Geocoding · Mapbox / Google"]
-        PAY["Payments · Stripe / Razorpay"]
+        PAY["Payments · Razorpay"]
         META["Meta Lead Ads<br/>OAuth + webhooks"]
         AI["OpenAI utilities<br/>descriptions / transcription"]
         FBASE["Firebase Admin<br/>push"]
@@ -104,7 +104,7 @@ graph TB
 
     subgraph Infra
         DOCKER["Multi-stage Docker<br/>node:18-alpine"]
-        DEPLOY["Cloud deploy<br/>(managed host)"]
+        DEPLOY["Render (API)<br/>Vercel (web CRM)<br/>auto-deploy on push"]
     end
 
     WEB -->|HTTPS| RL
@@ -220,9 +220,9 @@ The same discipline extends to the React Native client, so every backend outcome
 
 **Layered architecture (Schema → Resolvers → Service → Database).** Resolvers stay thin; services orchestrate and validate; the database layer encapsulates Prisma reads/writes and transactions.
 
-**Provider-based integrations.** Payments, geocoding, and external services use provider selection via configuration — swap a provider without touching call sites.
+**Provider-based integrations.** Geocoding and external services use provider selection via configuration — swap a provider without touching call sites.
 
-**Docker-first workflow.** A multi-stage build keeps the production image lean (no TypeScript compiler or dev tooling shipped); Makefile targets standardize migrate/deploy/dev.
+**Docker-first workflow with automated deploys.** A multi-stage build keeps the production image lean (no TypeScript compiler or dev tooling shipped); Makefile targets standardize migrate/deploy/dev. The API auto-deploys to Render on push to `staging` or `main`, and the web CRM deploys through Vercel — deliberately simple, but automatic and repeatable, with staging and production separated by branch.
 
 **Test-driven regression + production observability.** Integration tests lock contracts; Sentry catches production-only failures; health checks + Uptime Robot guard availability.
 
@@ -239,7 +239,7 @@ The same discipline extends to the React Native client, so every backend outcome
 | Auth | JWT |
 | File storage | AWS S3 + presigned URLs |
 | Email | Resend |
-| Payments | Stripe + Razorpay |
+| Payments | Razorpay (payment links) |
 | Geocoding / Places | Mapbox + Google Maps (provider-based) |
 | Lead ingestion | Meta Lead Ads (OAuth + webhooks) |
 | Scheduling | node-cron |
@@ -247,6 +247,7 @@ The same discipline extends to the React Native client, so every backend outcome
 | Uptime | Health endpoints + Uptime Robot |
 | Testing | Jest + Supertest (backend), React Native Testing Library, Maestro (mobile E2E) |
 | Containerization | Docker (multi-stage) |
+| Deployment | Render (API, auto-deploy on push) + Vercel (web CRM) |
 
 ---
 
